@@ -1,7 +1,9 @@
 package org.devrisby.c195.views;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -9,6 +11,13 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class SceneLoader {
+
+    public static void changeStage(Scenes scene, ActionEvent actionEvent) {
+        Stage currentStage = (Stage) ( (Node) actionEvent.getSource()).getScene().getWindow();
+        Parent root = loadStageRoot(scene);
+        Stage newStage = initStage(currentStage, scene.getSceneName(), root);
+        newStage.show();
+    }
 
     public static void showStage(Stage stage, Scenes scene) {
         Parent root = loadStageRoot(scene);
@@ -27,10 +36,8 @@ public class SceneLoader {
         }
     }
 
-//    private static Stage initStage(Stage stage, String windowTitle, Parent root, double windowWidth, double windowLength) {
     private static Stage initStage(Stage stage, String windowTitle, Parent root) {
         stage.setTitle(windowTitle);
-//        stage.setScene(new Scene(root, windowWidth, windowLength));
         stage.setScene(new Scene(root));
         return stage;
     }
