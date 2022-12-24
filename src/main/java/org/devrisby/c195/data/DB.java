@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Database {
+public class DB {
 
     private static final String protocol = "jdbc";
     private static final String vendorName = ":mysql:";
