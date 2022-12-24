@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="CENTER" prefHeight="406.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devrisby.c195.controllers.Login">
+<GridPane alignment="CENTER" prefHeight="543.0" prefWidth="753.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devrisby.c195.controllers.Login">
    <columnConstraints>
       <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
    </columnConstraints>
@@ -40,7 +40,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label alignment="TOP_LEFT" contentDisplay="CENTER" text="Error Messages Here" textFill="#dd0000">
+                  <Label fx:id="errorLabel" alignment="TOP_LEFT" contentDisplay="CENTER" text="Error Messages Here" textFill="#dd0000">
                      <HBox.margin>
                         <Insets left="150.0" />
                      </HBox.margin>
@@ -49,16 +49,16 @@
             </HBox>
          </children>
       </VBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
          <children>
-            <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0">
+            <VBox alignment="CENTER_RIGHT" prefHeight="181.0" prefWidth="230.0">
                <children>
-                  <Label alignment="CENTER" text="Username">
+                  <Label fx:id="usernameLabel" alignment="CENTER" text="Username">
                      <VBox.margin>
                         <Insets bottom="10.0" right="20.0" />
                      </VBox.margin>
                   </Label>
-                  <Label alignment="CENTER" text="Password">
+                  <Label fx:id="passwordLabel" alignment="CENTER" text="Password">
                      <VBox.margin>
                         <Insets right="25.0" />
                      </VBox.margin>
@@ -67,12 +67,12 @@
             </VBox>
             <VBox alignment="CENTER_RIGHT" prefHeight="135.0" prefWidth="255.0">
                <children>
-                  <TextField promptText="Username">
+                  <TextField fx:id="usernameTextField" promptText="Username">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
                   </TextField>
-                  <PasswordField promptText="Password">
+                  <PasswordField fx:id="passwordPasswordField" promptText="Password">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
@@ -83,18 +83,15 @@
       </HBox>
       <VBox alignment="BOTTOM_LEFT" prefHeight="136.0" prefWidth="521.0">
          <children>
-            <Label text="Log In">
+            <Label fx:id="loginTitleLabel" text="Log In">
                <font>
                   <Font size="32.0" />
                </font>
             </Label>
-            <Label text="User's Location">
+            <Label fx:id="locationLabel" text="User's Location">
                <font>
-                  <Font name="System Italic" size="16.0" />
+                  <Font name="System Italic" size="14.0" />
                </font>
-               <padding>
-                  <Insets left="5.0" />
-               </padding>
             </Label>
          </children>
          <opaqueInsets>
