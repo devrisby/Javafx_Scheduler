@@ -180,14 +180,14 @@ public class UserRepository implements CrudRepository<User> {
             ps.setString(1, user.getUserName());
             ps.setString(2, user.getPassword());
 
-            if(user.getUserID() == -1) {
+            if(user.getUserID() != -1) {
                 ps.setInt(3, user.getUserID());
             }
 
-            ResultSet rs = ps.executeQuery();
-            rs.next();
+            ps.executeUpdate();
 
-            return new User(rs.getInt("User_ID"), rs.getString("User_Name"), rs.getString("Password"));
+            return findByUserName(user.getUserName()).orElse(null);
+
         } catch (SQLException e) {
             System.out.println("Error saving or updating user to database!\n" + e.getMessage());
             System.exit(1);

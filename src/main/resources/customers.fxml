@@ -9,32 +9,35 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="928.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devrisby.c195.controllers.Customers">
    <children>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <VBox alignment="CENTER" prefHeight="136.0" prefWidth="928.0" spacing="15.0">
          <children>
-            <Label text="Customers">
+            <Label fx:id="titleLabel" text="Customers">
                <font>
                   <Font size="36.0" />
                </font>
             </Label>
+            <Label fx:id="errorLabel" text="Error messages here" textFill="RED" />
          </children>
-      </HBox>
-      <TableView prefHeight="302.0" prefWidth="600.0">
+      </VBox>
+      <TableView fx:id="customerTableView" prefHeight="302.0" prefWidth="600.0">
         <columns>
-          <TableColumn prefWidth="50.0" text="ID" />
-          <TableColumn prefWidth="150.0" text="Name" />
-            <TableColumn prefWidth="150.0" text="Address" />
-            <TableColumn prefWidth="100.0" text="Postal Code" />
-            <TableColumn minWidth="-Infinity" prefWidth="150.0" text="Phone Number" />
+          <TableColumn fx:id="idTableColumn" prefWidth="50.0" text="ID" />
+          <TableColumn fx:id="nameTableColumn" prefWidth="150.0" text="Name" />
+            <TableColumn fx:id="addressTableColumn" prefWidth="150.0" text="Address" />
+            <TableColumn fx:id="divisionTableColumn" minWidth="-Infinity" prefWidth="150.0" text="First-lvl Division" />
+            <TableColumn fx:id="postalCodeTableColumn" prefWidth="100.0" text="Postal Code" />
+            <TableColumn fx:id="countryTableColumn" minWidth="-Infinity" prefWidth="150.0" text="Country" />
+            <TableColumn fx:id="phoneNumberTableColumn" minWidth="-Infinity" prefWidth="177.0" text="Phone Number" />
         </columns>
       </TableView>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="928.0" spacing="10.0">
          <children>
-            <Button mnemonicParsing="false" text="Add" />
+            <Button fx:id="addButton" mnemonicParsing="false" text="Add" />
             <Button mnemonicParsing="false" text="Edit" />
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Delete" />
+            <Button fx:id="deleteButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Delete" />
+            <Button layoutX="496.0" layoutY="34.0" mnemonicParsing="false" text="Cancel" />
          </children>
          <VBox.margin>
             <Insets />

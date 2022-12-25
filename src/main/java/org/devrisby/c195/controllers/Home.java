@@ -5,10 +5,13 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 import org.devrisby.c195.models.User;
 import org.devrisby.c195.services.LocationService;
+import org.devrisby.c195.views.SceneLoader;
+import org.devrisby.c195.views.Scenes;
 
 import java.net.URL;
 import java.text.DateFormat;
@@ -31,6 +34,9 @@ public class Home implements Initializable {
     @FXML
     Label londonTimeLabel;
 
+    @FXML
+    Button customersButton;
+
     public Home(User user) {
         this.user = user;
     }
@@ -40,6 +46,7 @@ public class Home implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         titleLabel.setText("Welcome, " + this.user.getUserName());
         initClocks();
+        this.customersButton.setOnAction(actionEvent -> SceneLoader.changeScene(Scenes.CUSTOMERS, actionEvent));
     }
 
     private void initClocks(){

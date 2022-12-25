@@ -7,7 +7,8 @@ import java.nio.file.Paths;
 public enum Scenes {
     LOGIN("login.fxml", "Login"),
     HOME("home.fxml", "Home"),
-    CUSTOMERS("customers.fxml", "Customers");
+    CUSTOMERS("customers.fxml", "Customers"),
+    CUSTOMERADD("customerAdd.fxml", "Add New Customer");
 
     private final String fileName;
     private final String sceneName;

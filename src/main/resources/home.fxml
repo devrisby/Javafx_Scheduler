@@ -80,7 +80,7 @@
       </VBox>
       <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="60.0">
          <children>
-          <Button mnemonicParsing="false" text="Customers" />
+          <Button fx:id="customersButton" mnemonicParsing="false" text="Customers" />
             <Button mnemonicParsing="false" text="Appointments" />
             <Button mnemonicParsing="false" text="Reports" />
          </children>
