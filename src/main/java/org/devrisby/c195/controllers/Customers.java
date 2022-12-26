@@ -52,6 +52,12 @@ public class Customers implements Initializable {
     @FXML
     Button deleteButton;
 
+    @FXML
+    Button logoutButton;
+
+    @FXML
+    Button editButton;
+
     public Customers(){
         this.customerRepository = new CustomerRepository(DB.getConnection());
     }
@@ -62,6 +68,8 @@ public class Customers implements Initializable {
         this.errorLabel.setText("");
         this.addButton.setOnAction(e -> SceneLoader.changeScene(Scenes.CUSTOMERADD, e));
         this.deleteButton.setOnAction(this::deleteOnAction);
+        this.logoutButton.setOnAction(event -> SceneLoader.changeScene(Scenes.LOGIN, event));
+        this.editButton.setOnAction(this::editOnAction);
     }
 
     private void initTable(){
@@ -85,6 +93,7 @@ public class Customers implements Initializable {
         customerTableView.setItems(customers);
     }
 
+    // TODO: delete appointments first
     private void deleteOnAction(Event event){
         TableSelectionModel<Customer> selectedCustomer = this.customerTableView.getSelectionModel();
         if(selectedCustomer.getSelectedItem() != null) {
@@ -95,6 +104,17 @@ public class Customers implements Initializable {
         } else {
             this.errorLabel.setText("No row selected. Please select a customer from the table");
         }
+    }
 
+    private void editOnAction(Event event) {
+        TableSelectionModel<Customer> selectedCustomer = this.customerTableView.getSelectionModel();
+
+        if(selectedCustomer.getSelectedItem() != null) {
+            Customer customer = selectedCustomer.getSelectedItem();
+            CustomerEdit customerEdit = new CustomerEdit(customer);
+            SceneLoader.changeScene(Scenes.CUSTOMEREDIT, event, customerEdit);
+        } else {
+            this.errorLabel.setText("No row selected. Please select a customer from the table");
+        }
     }
 }

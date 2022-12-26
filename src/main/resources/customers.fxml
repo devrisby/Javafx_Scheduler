@@ -35,9 +35,9 @@
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="928.0" spacing="10.0">
          <children>
             <Button fx:id="addButton" mnemonicParsing="false" text="Add" />
-            <Button mnemonicParsing="false" text="Edit" />
+            <Button fx:id="editButton" mnemonicParsing="false" text="Edit" />
             <Button fx:id="deleteButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Delete" />
-            <Button layoutX="496.0" layoutY="34.0" mnemonicParsing="false" text="Cancel" />
+            <Button fx:id="logoutButton" layoutX="496.0" layoutY="34.0" mnemonicParsing="false" text="Logout" />
          </children>
          <VBox.margin>
             <Insets />

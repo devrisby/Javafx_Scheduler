@@ -14,8 +14,6 @@ import org.devrisby.c195.views.SceneLoader;
 import org.devrisby.c195.views.Scenes;
 
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.ResourceBundle;
 

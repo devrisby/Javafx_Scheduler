@@ -9,9 +9,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import org.devrisby.c195.data.CountryRepository;
 import org.devrisby.c195.data.CustomerRepository;
 import org.devrisby.c195.data.DB;
 import org.devrisby.c195.data.FirstLvlDivisionRepository;
+import org.devrisby.c195.models.Country;
 import org.devrisby.c195.models.Customer;
 import org.devrisby.c195.models.FirstLvlDivision;
 import org.devrisby.c195.views.SceneLoader;
@@ -27,11 +29,7 @@ public class CustomerAdd implements Initializable {
 
     private CustomerRepository customerRepository;
     private FirstLvlDivisionRepository firstLvlDivisionRepository;
-
-    public CustomerAdd(){
-        this.customerRepository = new CustomerRepository(DB.getConnection());
-        this.firstLvlDivisionRepository = new FirstLvlDivisionRepository(DB.getConnection());
-    }
+    private CountryRepository countryRepository;
 
     @FXML
     TextField customerNameTextField;
@@ -52,18 +50,22 @@ public class CustomerAdd implements Initializable {
     Button addButton;
 
     @FXML
-    Button cancelButton;
+    Button backButton;
 
     @FXML
     Label errorLabel;
 
-
+    public CustomerAdd(){
+        this.customerRepository = new CustomerRepository(DB.getConnection());
+        this.firstLvlDivisionRepository = new FirstLvlDivisionRepository(DB.getConnection());
+        this.countryRepository = new CountryRepository(DB.getConnection());
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.errorLabel.setText("");
         this.addButton.setOnAction(this::addCustomerAction);
-        this.cancelButton.setOnAction(actionEvent -> SceneLoader.changeScene(Scenes.CUSTOMERS, actionEvent));
+        this.backButton.setOnAction(actionEvent -> SceneLoader.changeScene(Scenes.CUSTOMERS, actionEvent));
         initComboBox();
     }
 
@@ -88,6 +90,8 @@ public class CustomerAdd implements Initializable {
                     new String[]{"Division, Country", divisionCountry})
             );
 
+            validateAddressFormValue(address);
+
             String division = divisionCountry.split(",")[0];
 
             FirstLvlDivision firstLvlDivision = this.firstLvlDivisionRepository.findByField(division);
@@ -100,13 +104,33 @@ public class CustomerAdd implements Initializable {
             }
 
         } catch (IllegalArgumentException e) {
-            this.errorLabel.setText("Please fill out all fields! Missing: " + e.getMessage());
+            this.errorLabel.setText(e.getMessage());
         }
     }
 
     private void validateFormValues(List<String[]> values) {
         values.forEach(v -> {
-            if(v[1] == null || v[1].isBlank() || v[1].isEmpty()) throw new IllegalArgumentException(v[0]);
+            if(v[1] == null || v[1].isBlank() || v[1].isEmpty()){
+                throw new IllegalArgumentException("Please fill out all fields! Missing: " + v[0]);
+            }
+        });
+    }
+
+    // Invalidate address if it includes first-level division or country data
+    private void validateAddressFormValue(String addressFormValue) {
+        List<FirstLvlDivision> firstLvlDivisions = this.firstLvlDivisionRepository.findAll();
+        List<Country> countries = this.countryRepository.findAll();
+
+        firstLvlDivisions.forEach(division -> {
+            if(addressFormValue.contains(division.getDivisionName())){
+                throw new IllegalArgumentException("Address cannot contain first level division or country data!");
+            }
+        });
+
+        countries.forEach(country -> {
+            if(addressFormValue.contains(country.getCountryName())){
+                throw new IllegalArgumentException("Address cannot contain division or country data!");
+            }
         });
     }
 
