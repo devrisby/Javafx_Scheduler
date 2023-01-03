@@ -3,7 +3,6 @@ package org.devrisby.c195.controllers;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -31,11 +30,11 @@ import java.util.ResourceBundle;
 
 import static org.devrisby.c195.views.SceneLoader.changeScene;
 
-public class Login implements Initializable {
+public class LoginController implements Initializable {
 
     private final UserService userService;
 
-    public Login() {
+    public LoginController() {
         this.userService = new UserService(new UserRepository(DB.getConnection()));
     }
 
@@ -108,8 +107,8 @@ public class Login implements Initializable {
             this.errorLabel.setText(LocationService.getResourceBundle().getString("errorLabelSuccess"));
             loginReport.setLoginSuccess(true);
             ReportServices.updateLoginActivity(loginReport);
-            Home home = new Home(user.get());
-            new Timeline(new KeyFrame(Duration.seconds(1.5), keyframeActionEvent -> changeScene(Scenes.HOME, actionEvent, home))).play();
+            HomeController homeController = new HomeController(user.get());
+            new Timeline(new KeyFrame(Duration.seconds(1.5), keyframeActionEvent -> changeScene(Scenes.HOME, actionEvent, homeController))).play();
         }
     }
 }

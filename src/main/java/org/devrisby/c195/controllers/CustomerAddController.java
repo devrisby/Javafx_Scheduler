@@ -1,7 +1,5 @@
 package org.devrisby.c195.controllers;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,12 +18,12 @@ import org.devrisby.c195.views.SceneLoader;
 import org.devrisby.c195.views.Scenes;
 
 import java.net.URL;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class CustomerAdd implements Initializable {
+public class CustomerAddController implements Initializable {
+
+    // Todo: display customer id and make it uneditable
 
     private CustomerRepository customerRepository;
     private FirstLvlDivisionRepository firstLvlDivisionRepository;
@@ -55,7 +53,7 @@ public class CustomerAdd implements Initializable {
     @FXML
     Label errorLabel;
 
-    public CustomerAdd(){
+    public CustomerAddController(){
         this.customerRepository = new CustomerRepository(DB.getConnection());
         this.firstLvlDivisionRepository = new FirstLvlDivisionRepository(DB.getConnection());
         this.countryRepository = new CountryRepository(DB.getConnection());
@@ -70,6 +68,7 @@ public class CustomerAdd implements Initializable {
     }
 
     private void initComboBox(){
+        // Todo: Change so selecting country will bring up the appropriate first level divisions
         List<FirstLvlDivision> divisions = this.firstLvlDivisionRepository.findAll();
         divisions.forEach(d -> this.firstLvlDivisionCountryComboBox.getItems().add(d.getDivisionName() + "," + d.getCountry().getCountryName()));
     }

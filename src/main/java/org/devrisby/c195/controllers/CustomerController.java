@@ -19,7 +19,7 @@ import org.devrisby.c195.views.Scenes;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Customers implements Initializable {
+public class CustomerController implements Initializable {
 
     private CustomerRepository customerRepository;
 
@@ -58,7 +58,7 @@ public class Customers implements Initializable {
     @FXML
     Button editButton;
 
-    public Customers(){
+    public CustomerController(){
         this.customerRepository = new CustomerRepository(DB.getConnection());
     }
 
@@ -94,6 +94,7 @@ public class Customers implements Initializable {
     }
 
     // TODO: delete appointments first
+    // TODO: get deletion confirmation first before deleting
     private void deleteOnAction(Event event){
         TableSelectionModel<Customer> selectedCustomer = this.customerTableView.getSelectionModel();
         if(selectedCustomer.getSelectedItem() != null) {
@@ -111,8 +112,8 @@ public class Customers implements Initializable {
 
         if(selectedCustomer.getSelectedItem() != null) {
             Customer customer = selectedCustomer.getSelectedItem();
-            CustomerEdit customerEdit = new CustomerEdit(customer);
-            SceneLoader.changeScene(Scenes.CUSTOMEREDIT, event, customerEdit);
+            CustomerEditController customerEditController = new CustomerEditController(customer);
+            SceneLoader.changeScene(Scenes.CUSTOMEREDIT, event, customerEditController);
         } else {
             this.errorLabel.setText("No row selected. Please select a customer from the table");
         }

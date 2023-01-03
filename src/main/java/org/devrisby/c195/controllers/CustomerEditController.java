@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class CustomerEdit implements Initializable {
+public class CustomerEditController implements Initializable {
     private final Customer customer;
 
     private CustomerRepository customerRepository;
@@ -52,7 +52,7 @@ public class CustomerEdit implements Initializable {
     @FXML
     Label errorLabel;
 
-    public CustomerEdit(Customer customer) {
+    public CustomerEditController(Customer customer) {
         this.customer = customer;
         this.customerRepository = new CustomerRepository(DB.getConnection());
         this.firstLvlDivisionRepository = new FirstLvlDivisionRepository(DB.getConnection());

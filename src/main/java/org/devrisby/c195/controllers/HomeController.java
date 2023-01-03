@@ -17,7 +17,7 @@ import java.net.URL;
 import java.time.ZoneId;
 import java.util.ResourceBundle;
 
-public class Home implements Initializable {
+public class HomeController implements Initializable {
     private final User user;
 
     @FXML
@@ -35,7 +35,7 @@ public class Home implements Initializable {
     @FXML
     Button customersButton;
 
-    public Home(User user) {
+    public HomeController(User user) {
         this.user = user;
     }
 
