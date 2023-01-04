@@ -9,7 +9,8 @@ public enum Scenes {
     HOME("home.fxml", "Home"),
     CUSTOMERS("customers.fxml", "Customers"),
     CUSTOMERADD("customerAdd.fxml", "Add New Customer"),
-    CUSTOMEREDIT("customerEdit.fxml", "Edit Customer");
+    CUSTOMEREDIT("customerEdit.fxml", "Edit Customer"),
+    APPOINTMENTS("appointments.fxml", "Appointments");
 
     private final String fileName;
     private final String sceneName;

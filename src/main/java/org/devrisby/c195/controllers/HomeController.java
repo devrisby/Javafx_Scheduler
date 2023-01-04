@@ -35,6 +35,9 @@ public class HomeController implements Initializable {
     @FXML
     Button customersButton;
 
+    @FXML
+    Button appointmentsButton;
+
     public HomeController(User user) {
         this.user = user;
     }
@@ -45,6 +48,7 @@ public class HomeController implements Initializable {
         titleLabel.setText("Welcome, " + this.user.getUserName());
         initClocks();
         this.customersButton.setOnAction(actionEvent -> SceneLoader.changeScene(Scenes.CUSTOMERS, actionEvent));
+        this.appointmentsButton.setOnAction(actionEvent -> SceneLoader.changeScene(Scenes.APPOINTMENTS, actionEvent));
     }
 
     private void initClocks(){
