@@ -22,13 +22,16 @@
 - _Scheduling_
   - Add, update, and delete customer appointments
   - Display custom message upon customer appointment deletion
-  - Feature options for displaying customer appointments by month or week 
+  - Feature options for displaying customer appointments by:
+    - Current month
+    - Current week
+    - All
   - Store appointment times in UTC and display times in user's local timezone
   - Prevent creating appointments when:
-    - it is outside of business hours (8:00 am - 10:00pm during weekdays)
+    - it is outside of business hours (8:00 am - 10:00pm EST)
     - it overlaps with existing appointments
   - Display appointment alert in user interface when there is an appointment within 15 minutes of the user's login
-- R*eports*
+- _Reports_
   - Display total number of customer appointments by type and month
   - Schedule for each contact in the organization
   - Current number of appointments handled by each contact in the organization for the present month
@@ -45,7 +48,7 @@
 <details>
     <summary>Home Screen</summary>
 
-![home Screen](./docs/home_no_appointments.png)
+![homeController Screen](./docs/home_no_appointments.png)
 </details>
 
 <details>
