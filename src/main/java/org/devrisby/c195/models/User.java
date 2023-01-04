@@ -12,9 +12,7 @@ public class User {
     }
 
     public User(String userName, String password) {
-        this.userID = -1;
-        this.userName = userName;
-        this.password = password;
+        this(-1, userName, password);
     }
 
     public int getUserID() {
