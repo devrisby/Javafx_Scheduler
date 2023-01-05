@@ -27,14 +27,14 @@
             <columns>
                 <TableColumn fx:id="idTableColumn" prefWidth="39.0" text="ID" />
                 <TableColumn fx:id="titleTableColumn" prefWidth="127.0" text="Title" />
-                <TableColumn fx:id="descriptionTableColumn" prefWidth="207.0" text="Description" />
-                <TableColumn fx:id="locationTableColumn" minWidth="-Infinity" prefWidth="117.0" text="Location" />
-                <TableColumn fx:id="contactNameTableColumn" prefWidth="130.0" text="Contact" />
-                <TableColumn fx:id="typeTableColumn" minWidth="-Infinity" prefWidth="180.0" text="Type" />
-                <TableColumn fx:id="startTableColumn" maxWidth="168.0" minWidth="-1.0" prefWidth="111.0" text="Start Time" />
-            <TableColumn fx:id="endTableColumn" minWidth="-Infinity" prefWidth="100.0" text="End Time" />
-            <TableColumn fx:id="userIdTableColumn" minWidth="-Infinity" prefWidth="81.0" text="User_ID" />
-            <TableColumn fx:id="customerIdTableColumn" minWidth="-Infinity" prefWidth="94.0" text="Customer_ID" />
+                <TableColumn fx:id="descriptionTableColumn" prefWidth="141.0" text="Description" />
+                <TableColumn fx:id="locationTableColumn" minWidth="-Infinity" prefWidth="136.0" text="Location" />
+                <TableColumn fx:id="contactNameTableColumn" prefWidth="134.0" text="Contact" />
+                <TableColumn fx:id="typeTableColumn" minWidth="-Infinity" prefWidth="139.0" text="Type" />
+                <TableColumn fx:id="startTableColumn" maxWidth="169.0" minWidth="-1.0" prefWidth="160.0" text="Start Time" />
+            <TableColumn fx:id="endTableColumn" minWidth="-Infinity" prefWidth="164.0" text="End Time" />
+            <TableColumn fx:id="userIdTableColumn" minWidth="-Infinity" prefWidth="67.0" text="User_ID" />
+            <TableColumn fx:id="customerIdTableColumn" minWidth="-Infinity" prefWidth="79.0" text="Customer_ID" />
             </columns>
         </TableView>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="928.0" spacing="10.0">
