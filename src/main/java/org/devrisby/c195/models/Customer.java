@@ -68,4 +68,9 @@ public class Customer {
     public void setDivision(FirstLvlDivision division) {
         this.division = division;
     }
+
+    @Override
+    public String toString(){
+        return this.getCustomerName();
+    }
 }
