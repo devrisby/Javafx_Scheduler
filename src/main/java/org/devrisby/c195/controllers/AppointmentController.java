@@ -7,13 +7,12 @@ import javafx.beans.value.ObservableIntegerValue;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.util.Callback;
 import org.devrisby.c195.data.AppointmentRepository;
 import org.devrisby.c195.data.DB;
@@ -80,7 +79,9 @@ public class AppointmentController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initTable();
         this.errorLabel.setText("");
+        this.addButton.setOnAction(e -> SceneLoader.changeScene(Scenes.APPOINTMENTSADD, e));
         this.logoutButton.setOnAction(event -> SceneLoader.changeScene(Scenes.LOGIN, event));
+        this.deleteButton.setOnAction(this::deleteOnAction);
     }
 
     private void initTable() {
@@ -102,5 +103,30 @@ public class AppointmentController implements Initializable {
 
         // Initialize tableview with appointments
         appointmentTableView.setItems(appointments);
+    }
+
+    private void deleteOnAction(Event event) {
+        TableSelectionModel<Appointment> selectedAppointment = this.appointmentTableView.getSelectionModel();
+        if(selectedAppointment.getSelectedItem() != null) {
+            Appointment appointment = selectedAppointment.getSelectedItem();
+            if(confirmDeletionDialog(appointment)) {
+                this.appointmentRepository.delete(appointment);
+                this.errorLabel.setTextFill(Color.GREEN);
+                this.errorLabel.setText("Appointment deleted!");
+                initTable();
+            }
+        } else {
+            this.errorLabel.setText("No row selected. Please select a appointment from the table");
+        }
+    }
+
+    private boolean confirmDeletionDialog(Appointment appointment){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+        alert.setTitle("Appointments");
+        alert.setHeaderText("Delete " + appointment.getCustomer().getCustomerName() + "'s appointment?");
+        alert.setContentText("Please confirm deletion for " + appointment.getCustomer().getCustomerName() + " appointment at " + appointment.getStart().toString());
+
+        return alert.showAndWait().filter(response -> response == ButtonType.OK).isPresent();
     }
 }
