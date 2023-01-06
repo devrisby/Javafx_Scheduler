@@ -1,6 +1,7 @@
 package org.devrisby.c195.models;
 
-import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.ZonedDateTime;
 
 public class Appointment {
     private int appointmentID;
@@ -8,8 +9,8 @@ public class Appointment {
     private String description;
     private String location;
     private String type;
-    private Timestamp start;
-    private Timestamp end;
+    private Instant start;
+    private Instant end;
     private Customer customer;
     private Contact contact;
     private User user;
@@ -20,8 +21,8 @@ public class Appointment {
             String description,
             String location,
             String type,
-            Timestamp start,
-            Timestamp end,
+            Instant start,
+            Instant end,
             Customer customer,
             Contact contact,
             User user
@@ -43,8 +44,8 @@ public class Appointment {
             String description,
             String location,
             String type,
-            Timestamp start,
-            Timestamp end,
+            Instant start,
+            Instant end,
             Customer customer,
             Contact contact,
             User user
@@ -92,19 +93,19 @@ public class Appointment {
         this.type = type;
     }
 
-    public Timestamp getStart() {
+    public Instant getStart() {
         return start;
     }
 
-    public void setStart(Timestamp start) {
+    public void setStart(Instant start) {
         this.start = start;
     }
 
-    public Timestamp getEnd() {
+    public Instant getEnd() {
         return end;
     }
 
-    public void setEnd(Timestamp end) {
+    public void setEnd(Instant end) {
         this.end = end;
     }
 

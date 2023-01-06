@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -120,8 +121,8 @@ public class AppointmentRepository {
                         rs.getString("Description"),
                         rs.getString("Location"),
                         rs.getString("Type"),
-                        rs.getTimestamp("Start"),
-                        rs.getTimestamp("End"),
+                        rs.getTimestamp("Start").toInstant(),
+                        rs.getTimestamp("End").toInstant(),
                         customer,
                         contact,
                         user
@@ -158,8 +159,8 @@ public class AppointmentRepository {
                     rs.getString("Description"),
                     rs.getString("Location"),
                     rs.getString("Type"),
-                    rs.getTimestamp("Start"),
-                    rs.getTimestamp("End"),
+                    rs.getTimestamp("Start").toInstant(),
+                    rs.getTimestamp("End").toInstant(),
                     customer,
                     contact,
                     user
@@ -195,8 +196,8 @@ public class AppointmentRepository {
                         rs.getString("Description"),
                         rs.getString("Location"),
                         rs.getString("Type"),
-                        rs.getTimestamp("Start"),
-                        rs.getTimestamp("End"),
+                        rs.getTimestamp("Start").toInstant(),
+                        rs.getTimestamp("End").toInstant(),
                         customer,
                         contact,
                         user
@@ -235,8 +236,8 @@ public class AppointmentRepository {
                         rs.getString("Description"),
                         rs.getString("Location"),
                         rs.getString("Type"),
-                        rs.getTimestamp("Start"),
-                        rs.getTimestamp("End"),
+                        rs.getTimestamp("Start").toInstant(),
+                        rs.getTimestamp("End").toInstant(),
                         customer,
                         contact,
                         user
