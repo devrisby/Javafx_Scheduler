@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
 
 public class CustomerEditController implements Initializable {
     private final Customer customer;
-
     private CustomerRepository customerRepository;
     private FirstLvlDivisionRepository firstLvlDivisionRepository;
     private CountryRepository countryRepository;

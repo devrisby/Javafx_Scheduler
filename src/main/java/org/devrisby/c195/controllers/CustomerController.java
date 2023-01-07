@@ -9,10 +9,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.util.Callback;
 import org.devrisby.c195.data.CustomerRepository;
 import org.devrisby.c195.data.DB;
+import org.devrisby.c195.models.Appointment;
 import org.devrisby.c195.models.Customer;
+import org.devrisby.c195.services.CustomerService;
 import org.devrisby.c195.views.SceneLoader;
 import org.devrisby.c195.views.Scenes;
 
@@ -22,6 +25,7 @@ import java.util.ResourceBundle;
 public class CustomerController implements Initializable {
 
     private CustomerRepository customerRepository;
+    private CustomerService customerService;
 
     @FXML
     Label titleLabel;
@@ -60,6 +64,7 @@ public class CustomerController implements Initializable {
 
     public CustomerController(){
         this.customerRepository = new CustomerRepository(DB.getConnection());
+        this.customerService = new CustomerService();
     }
 
     @Override
@@ -99,9 +104,12 @@ public class CustomerController implements Initializable {
         TableSelectionModel<Customer> selectedCustomer = this.customerTableView.getSelectionModel();
         if(selectedCustomer.getSelectedItem() != null) {
             Customer customer = selectedCustomer.getSelectedItem();
-            this.customerRepository.deleteById(customer.getCustomerID());
-            this.errorLabel.setText("Customer " + customer.getCustomerName() + ", has been deleted!");
-            initTable();
+            if(confirmDeletionDialog(customer)) {
+                this.customerService.delete(customer);
+                this.errorLabel.setTextFill(Color.GREEN);
+                this.errorLabel.setText("Customer " + customer.getCustomerName() + ", has been deleted!");
+                initTable();
+            }
         } else {
             this.errorLabel.setText("No row selected. Please select a customer from the table");
         }
@@ -117,5 +125,18 @@ public class CustomerController implements Initializable {
         } else {
             this.errorLabel.setText("No row selected. Please select a customer from the table");
         }
+    }
+
+    private boolean confirmDeletionDialog(Customer customer){
+        String name = customer.getCustomerName();
+        int numOfAppointments = this.customerService.findAppointments(customer).size();
+        String appointmentsSingularOrPlural = "appointment" + (numOfAppointments == 1 ? "":"s");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+        alert.setTitle("Appointments");
+        alert.setHeaderText("Delete " + customer);
+        alert.setContentText("Please confirm deletion for " + name + "'s " + numOfAppointments + " " + appointmentsSingularOrPlural);
+
+        return alert.showAndWait().filter(response -> response == ButtonType.OK).isPresent();
     }
 }
