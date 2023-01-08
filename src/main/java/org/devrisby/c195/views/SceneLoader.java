@@ -8,7 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.devrisby.c195.services.TimezoneService;
+import org.devrisby.c195.services.TimeService;
 
 import java.io.IOException;
 
@@ -36,7 +36,7 @@ public class SceneLoader {
 
     private static Parent loadStageRoot(Scenes scene) {
         try {
-            return FXMLLoader.load(scene.getFXMLFileURL(), TimezoneService.getResourceBundle());
+            return FXMLLoader.load(scene.getFXMLFileURL(), TimeService.getResourceBundle());
         } catch (IOException err) {
             System.out.println("Error loading FXML file!\n" + err.getMessage());
             err.printStackTrace();
@@ -49,7 +49,7 @@ public class SceneLoader {
         Parent parent = null;
 
         try {
-            FXMLLoader loader = new FXMLLoader(scene.getFXMLFileURL(), TimezoneService.getResourceBundle());
+            FXMLLoader loader = new FXMLLoader(scene.getFXMLFileURL(), TimeService.getResourceBundle());
             loader.setController(controller);
             parent = loader.load();
 

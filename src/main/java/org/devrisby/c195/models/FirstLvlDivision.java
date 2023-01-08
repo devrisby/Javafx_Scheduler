@@ -22,4 +22,9 @@ public class FirstLvlDivision {
     public Country getCountry() {
         return country;
     }
+
+    @Override
+    public String toString() {
+        return this.divisionName;
+    }
 }

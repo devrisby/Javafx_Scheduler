@@ -15,6 +15,7 @@ import org.devrisby.c195.data.CustomerRepository;
 import org.devrisby.c195.data.DB;
 import org.devrisby.c195.models.Appointment;
 import org.devrisby.c195.models.Customer;
+import org.devrisby.c195.services.AppointmentService;
 import org.devrisby.c195.services.CustomerService;
 import org.devrisby.c195.views.SceneLoader;
 import org.devrisby.c195.views.Scenes;
@@ -26,6 +27,7 @@ public class CustomerController implements Initializable {
 
     private CustomerRepository customerRepository;
     private CustomerService customerService;
+    private final AppointmentService appointmentService;
 
     @FXML
     Label titleLabel;
@@ -65,6 +67,7 @@ public class CustomerController implements Initializable {
     public CustomerController(){
         this.customerRepository = new CustomerRepository(DB.getConnection());
         this.customerService = new CustomerService();
+        this.appointmentService = new AppointmentService();
     }
 
     @Override
@@ -129,13 +132,16 @@ public class CustomerController implements Initializable {
 
     private boolean confirmDeletionDialog(Customer customer){
         String name = customer.getCustomerName();
-        int numOfAppointments = this.customerService.findAppointments(customer).size();
+        int numOfAppointments = this.appointmentService.customerAppointments(customer).size();
         String appointmentsSingularOrPlural = "appointment" + (numOfAppointments == 1 ? "":"s");
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        String alertContentText = numOfAppointments == 0 ?
+                name + " has 0 appointments" :
+                "Deleting customer will delete " + name + "'s " + numOfAppointments + " " + appointmentsSingularOrPlural;
 
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Appointments");
         alert.setHeaderText("Delete " + customer);
-        alert.setContentText("Please confirm deletion for " + name + "'s " + numOfAppointments + " " + appointmentsSingularOrPlural);
+        alert.setContentText(alertContentText);
 
         return alert.showAndWait().filter(response -> response == ButtonType.OK).isPresent();
     }

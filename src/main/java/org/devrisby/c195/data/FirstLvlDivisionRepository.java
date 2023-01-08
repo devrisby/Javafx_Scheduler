@@ -30,11 +30,10 @@ public class FirstLvlDivisionRepository implements ReadRepository<FirstLvlDivisi
             List<FirstLvlDivision> firstLvlDivisions = new ArrayList<>();
 
             while(rs.next()) {
-                Country country = new Country(rs.getInt("Country_ID"), rs.getString("Country"));
                 firstLvlDivisions.add(new FirstLvlDivision(
                         rs.getInt("Division_ID"),
                         rs.getString("Division"),
-                        country)
+                        new Country(rs.getInt("Country_ID"), rs.getString("Country")))
                 );
             }
 
@@ -96,6 +95,38 @@ public class FirstLvlDivisionRepository implements ReadRepository<FirstLvlDivisi
                     rs.getString("Division"),
                     country
             );
+
+        } catch (SQLException e) {
+            System.out.println("Error retrieving first level division from database!\n" + e.getMessage());
+            System.exit(1);
+        }
+
+        return null;
+    }
+
+    public List<FirstLvlDivision> findByCountryId(int countryId) {
+        String sql = "SELECT Division_ID, Division, c.Country_ID, c.Country\n" +
+                "FROM first_level_divisions f\n" +
+                "JOIN countries c\n" +
+                "USING(Country_ID)" +
+                "WHERE Country_ID=?";
+
+        try {
+            PreparedStatement ps = db.prepareStatement(sql);
+            ps.setInt(1, countryId);
+            ResultSet rs = ps.executeQuery();
+
+            List<FirstLvlDivision> firstLvlDivisions = new ArrayList<>();
+
+            while(rs.next()) {
+                firstLvlDivisions.add(new FirstLvlDivision (
+                        rs.getInt("Division_ID"),
+                        rs.getString("Division"),
+                        new Country(rs.getInt("Country_ID"), rs.getString("Country"))
+                ));
+            }
+
+            return firstLvlDivisions;
 
         } catch (SQLException e) {
             System.out.println("Error retrieving first level division from database!\n" + e.getMessage());

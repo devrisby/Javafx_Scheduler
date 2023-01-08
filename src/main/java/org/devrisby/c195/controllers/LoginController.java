@@ -14,17 +14,19 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import org.devrisby.c195.Main;
 import org.devrisby.c195.data.DB;
 import org.devrisby.c195.data.UserRepository;
 import org.devrisby.c195.models.LoginActivity;
 import org.devrisby.c195.models.User;
-import org.devrisby.c195.services.LocationService;
+import org.devrisby.c195.services.TimeService;
 import org.devrisby.c195.services.ReportServices;
 import org.devrisby.c195.services.UserService;
 import org.devrisby.c195.views.Scenes;
 
 import java.net.URL;
 import java.sql.Timestamp;
+import java.time.ZoneId;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -35,7 +37,7 @@ public class LoginController implements Initializable {
     private final UserService userService;
 
     public LoginController() {
-        this.userService = new UserService(new UserRepository(DB.getConnection()));
+        this.userService = new UserService();
     }
 
     @FXML
@@ -66,17 +68,17 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.loginTitleLabel.setText(LocationService.getResourceBundle().getString("loginTitleLabel"));
-        this.usernameLabel.setText(LocationService.getResourceBundle().getString("usernameLabel"));
-        this.usernameTextField.setPromptText(LocationService.getResourceBundle().getString("usernameTextFieldPrompt"));
-        this.passwordLabel.setText(LocationService.getResourceBundle().getString("passwordLabel"));
-        this.passwordPasswordField.setPromptText(LocationService.getResourceBundle().getString("passwordTextFieldPrompt"));
-        this.cancelButton.setText(LocationService.getResourceBundle().getString("cancelButton"));
+        this.loginTitleLabel.setText(TimeService.getResourceBundle().getString("loginTitleLabel"));
+        this.usernameLabel.setText(TimeService.getResourceBundle().getString("usernameLabel"));
+        this.usernameTextField.setPromptText(TimeService.getResourceBundle().getString("usernameTextFieldPrompt"));
+        this.passwordLabel.setText(TimeService.getResourceBundle().getString("passwordLabel"));
+        this.passwordPasswordField.setPromptText(TimeService.getResourceBundle().getString("passwordTextFieldPrompt"));
+        this.cancelButton.setText(TimeService.getResourceBundle().getString("cancelButton"));
         this.cancelButton.setOnAction(actionEvent -> Platform.exit());
-        this.loginButton.setText(LocationService.getResourceBundle().getString("loginButton"));
+        this.loginButton.setText(TimeService.getResourceBundle().getString("loginButton"));
         this.loginButton.setOnAction(this::onLoginAction);
         this.errorLabel.setText("");
-        this.locationLabel.setText(LocationService.getCurrentCountry());
+        this.locationLabel.setText(ZoneId.systemDefault().toString());
 
         this.usernameTextField.setOnKeyPressed(this::onEnterPressAction);
         this.passwordPasswordField.setOnKeyPressed(this::onEnterPressAction);
@@ -99,16 +101,17 @@ public class LoginController implements Initializable {
         loginReport.setTimeStamp(timestamp);
 
         if(username.isBlank() || password.isBlank() || user.isEmpty()) {
-            this.errorLabel.setText(LocationService.getResourceBundle().getString("errorLabelFail"));
+            this.errorLabel.setText(TimeService.getResourceBundle().getString("errorLabelFail"));
             loginReport.setLoginSuccess(false);
             ReportServices.updateLoginActivity(loginReport);
+            Main.SIGNED_IN_USER = null;
         } else {
+            Main.SIGNED_IN_USER = user.get();
             this.errorLabel.setTextFill(Color.GREEN);
-            this.errorLabel.setText(LocationService.getResourceBundle().getString("errorLabelSuccess"));
+            this.errorLabel.setText(TimeService.getResourceBundle().getString("errorLabelSuccess"));
             loginReport.setLoginSuccess(true);
             ReportServices.updateLoginActivity(loginReport);
-            HomeController homeController = new HomeController(user.get());
-            new Timeline(new KeyFrame(Duration.seconds(1.5), keyframeActionEvent -> changeScene(Scenes.HOME, actionEvent, homeController))).play();
+            new Timeline(new KeyFrame(Duration.seconds(1.5), keyframeActionEvent -> changeScene(Scenes.HOME, actionEvent))).play();
         }
     }
 }

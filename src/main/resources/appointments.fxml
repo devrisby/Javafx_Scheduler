@@ -19,7 +19,7 @@
                         <Font size="36.0" />
                     </font>
                 </Label>
-            <ComboBox prefWidth="150.0" promptText="Select View" />
+            <ComboBox fx:id="appointmentViewComboBox" prefWidth="150.0" promptText="Select View" />
                 <Label fx:id="errorLabel" text="Error messages here" textFill="RED" />
             </children>
         </VBox>

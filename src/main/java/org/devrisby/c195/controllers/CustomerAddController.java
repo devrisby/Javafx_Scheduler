@@ -1,5 +1,6 @@
 package org.devrisby.c195.controllers;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -7,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import org.devrisby.c195.data.CountryRepository;
 import org.devrisby.c195.data.CustomerRepository;
 import org.devrisby.c195.data.DB;
@@ -42,7 +44,10 @@ public class CustomerAddController implements Initializable {
     TextField phoneNumberTextField;
 
     @FXML
-    ComboBox<String> firstLvlDivisionCountryComboBox;
+    ComboBox<Country> countryComboBox;
+
+    @FXML
+    ComboBox<FirstLvlDivision> firstLvlDivisionComboBox;
 
     @FXML
     Button addButton;
@@ -68,9 +73,22 @@ public class CustomerAddController implements Initializable {
     }
 
     private void initComboBox(){
-        // Todo: Change so selecting country will bring up the appropriate first level divisions
-        List<FirstLvlDivision> divisions = this.firstLvlDivisionRepository.findAll();
-        divisions.forEach(d -> this.firstLvlDivisionCountryComboBox.getItems().add(d.getDivisionName() + "," + d.getCountry().getCountryName()));
+        List<Country> countries = this.countryRepository.findAll();
+        this.countryComboBox.setItems(FXCollections.observableArrayList(countries));
+        this.countryComboBox
+                .getSelectionModel()
+                .selectedItemProperty()
+                .addListener((options, oldValue, newValue) -> {
+                    if(newValue != null) {
+                        List<FirstLvlDivision> firstLvlDivisions = this.firstLvlDivisionRepository.findByCountryId(newValue.getCountryID());
+                        this.firstLvlDivisionComboBox.setItems(FXCollections.observableArrayList(firstLvlDivisions));
+                        this.firstLvlDivisionComboBox.setPromptText("");
+                    } else {
+                        this.firstLvlDivisionComboBox.setItems(null);
+                    }
+                });
+
+        this.firstLvlDivisionComboBox.setPromptText("Select a country first");
     }
 
     private void addCustomerAction(ActionEvent event) {
@@ -78,26 +96,24 @@ public class CustomerAddController implements Initializable {
         String address = this.addressTextField.getText();
         String postalCode = this.postalCodeTextField.getText();
         String phoneNumber = this.phoneNumberTextField.getText();
-        String divisionCountry = firstLvlDivisionCountryComboBox.getValue();
 
         try {
             validateFormValues(List.of(
                     new String[]{"Customer Name", customerName},
                     new String[]{"Address", address},
                     new String[]{"Postal Code", postalCode},
-                    new String[]{"Phone Number", phoneNumber},
-                    new String[]{"Division, Country", divisionCountry})
-            );
+                    new String[]{"Phone Number", phoneNumber}
+            ));
 
+            validateAddressComboBoxes();
             validateAddressFormValue(address);
 
-            String division = divisionCountry.split(",")[0];
-
-            FirstLvlDivision firstLvlDivision = this.firstLvlDivisionRepository.findByField(division);
+            FirstLvlDivision firstLvlDivision = this.firstLvlDivisionComboBox.getSelectionModel().getSelectedItem();
             Customer customer = new Customer(customerName, address, postalCode, phoneNumber, firstLvlDivision);
             Customer savedCustomer = this.customerRepository.save(customer);
 
             if(savedCustomer.getCustomerID() != -1) {
+                this.errorLabel.setTextFill(Color.GREEN);
                 this.errorLabel.setText("New Customer added!");
                 resetTextFields(List.of(this.customerNameTextField, this.addressTextField, this.phoneNumberTextField, this.postalCodeTextField));
             }
@@ -113,6 +129,18 @@ public class CustomerAddController implements Initializable {
                 throw new IllegalArgumentException("Please fill out all fields! Missing: " + v[0]);
             }
         });
+    }
+
+    private void validateAddressComboBoxes() {
+        Country selectedCountry = this.countryComboBox.getSelectionModel().getSelectedItem();
+        if(selectedCountry == null) {
+            throw new IllegalArgumentException("Missing country: Please select a country!");
+        } else {
+            FirstLvlDivision selectedDivision = this.firstLvlDivisionComboBox.getSelectionModel().getSelectedItem();
+            if(selectedDivision == null) {
+                throw new IllegalArgumentException("Missing division: Please select a division!");
+            }
+        }
     }
 
     // Invalidate address if it includes first-level division or country data

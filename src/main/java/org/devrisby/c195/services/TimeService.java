@@ -4,18 +4,13 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Locale;
-import java.util.Map;
 import java.util.ResourceBundle;
 
-public class TimezoneService {
+public class TimeService {
 
     // Times are in EST timezone
     private static ZonedDateTime businessStartHours = ZonedDateTime.of(LocalDateTime.of(LocalDate.now(), LocalTime.of(8,0)), ZoneId.of("US/Eastern"));
     private static ZonedDateTime businessEndHours = ZonedDateTime.of(LocalDateTime.of(LocalDate.now(), LocalTime.of(22,0)), ZoneId.of("US/Eastern"));
-
-    public static String getCurrentCountry() {
-        return Locale.getDefault().getDisplayCountry();
-    }
 
     public static ResourceBundle getResourceBundle() {
         return ResourceBundle.getBundle("fx", Locale.getDefault());
@@ -39,6 +34,18 @@ public class TimezoneService {
         }
 
         return time.withZoneSameInstant(ZoneId.of("US/Eastern"));
+    }
+
+    public boolean inbetweenStartAndEnd(Instant targetStart, Instant targetEnd, Instant startTime, Instant endTime) {
+        return targetStart.isAfter(startTime) && targetEnd.isBefore(endTime);
+    }
+
+    public boolean equalsStartOrEnd(Instant time, Instant startTime, Instant endTime) {
+        return timeIsEqualTo(time, startTime) || timeIsEqualTo(time, endTime);
+    }
+
+    public boolean timeIsEqualTo(Instant time, Instant targetTime) {
+        return time.equals(targetTime);
     }
 
     public static boolean isWithinBusinessHours(LocalTime localTime) {
