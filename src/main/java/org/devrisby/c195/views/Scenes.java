@@ -4,6 +4,7 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/** Enum class for FXML file names and file paths*/
 public enum Scenes {
     LOGIN("login.fxml", "Login"),
     HOME("home.fxml", "Home"),

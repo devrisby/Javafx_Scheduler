@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="568.0" prefWidth="875.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devrisby.c195.controllers.AppointmentAddController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="568.0" prefWidth="875.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devrisby.c195.modules.appointment.controllers.AppointmentFormAddController">
     <columnConstraints>
         <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -34,6 +34,11 @@
             </font>
             <GridPane.margin>
                 <Insets left="40.0" />
+            </GridPane.margin>
+        </Label>
+        <Label fx:id="errorLabel" text="Error messages here" textFill="RED" GridPane.columnIndex="1">
+            <GridPane.margin>
+                <Insets left="15.0" />
             </GridPane.margin>
         </Label>
         <VBox alignment="CENTER_LEFT" maxWidth="-Infinity" prefHeight="200.0" prefWidth="380.0" spacing="5.0" GridPane.rowIndex="1">
@@ -100,6 +105,22 @@
                 <Insets left="40.0" />
             </padding>
         </VBox>
+      <VBox alignment="CENTER_LEFT" maxWidth="-Infinity" prefHeight="200.0" prefWidth="380.0" spacing="5.0" GridPane.rowIndex="5">
+         <children>
+            <Label text="Type">
+               <VBox.margin>
+                  <Insets left="5.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="typeTextField" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+      </VBox>
         <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.rowIndex="6">
             <GridPane.margin>
                 <Insets right="5.0" />
@@ -108,11 +129,6 @@
                 <Button fx:id="addButton" mnemonicParsing="false" text="Add" />
             </children>
         </HBox>
-        <Label fx:id="errorLabel" text="Error messages here" textFill="RED" GridPane.columnIndex="1">
-            <GridPane.margin>
-                <Insets left="15.0" />
-            </GridPane.margin>
-        </Label>
       <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="294.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
             <Label text="Contact">
@@ -121,6 +137,38 @@
                </VBox.margin>
             </Label>
             <ComboBox fx:id="contactComboBox" prefWidth="300.0" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets left="75.0" />
+         </padding>
+      </VBox>
+      <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <children>
+            <Label text="Customer">
+               <VBox.margin>
+                  <Insets left="5.0" />
+               </VBox.margin>
+            </Label>
+            <ComboBox fx:id="customerComboBox" prefWidth="300.0" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets left="75.0" />
+         </padding>
+      </VBox>
+      <VBox alignment="CENTER_LEFT" layoutX="302.0" layoutY="334.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <children>
+            <Label text="User">
+               <VBox.margin>
+                  <Insets left="5.0" />
+               </VBox.margin>
+            </Label>
+            <ComboBox fx:id="userComboBox" prefWidth="300.0" />
          </children>
          <opaqueInsets>
             <Insets />
@@ -159,38 +207,6 @@
             <Insets left="75.0" />
          </padding>
       </HBox>
-      <VBox alignment="CENTER_LEFT" layoutX="302.0" layoutY="334.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-         <children>
-            <Label text="User">
-               <VBox.margin>
-                  <Insets left="5.0" />
-               </VBox.margin>
-            </Label>
-            <ComboBox fx:id="userComboBox" prefWidth="300.0" />
-         </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <padding>
-            <Insets left="75.0" />
-         </padding>
-      </VBox>
-      <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-         <children>
-            <Label text="Customer">
-               <VBox.margin>
-                  <Insets left="5.0" />
-               </VBox.margin>
-            </Label>
-            <ComboBox fx:id="customerComboBox" prefWidth="300.0" />
-         </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <padding>
-            <Insets left="75.0" />
-         </padding>
-      </VBox>
       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="25.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
          <children>
             <VBox alignment="CENTER_LEFT" fillWidth="false" prefHeight="81.0" prefWidth="300.0" spacing="2.0">
@@ -221,22 +237,6 @@
             <Insets left="75.0" />
          </padding>
       </HBox>
-      <VBox alignment="CENTER_LEFT" maxWidth="-Infinity" prefHeight="200.0" prefWidth="380.0" spacing="5.0" GridPane.rowIndex="5">
-         <children>
-            <Label text="Type">
-               <VBox.margin>
-                  <Insets left="5.0" />
-               </VBox.margin>
-            </Label>
-            <TextField fx:id="typeTextField" />
-         </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <padding>
-            <Insets left="40.0" />
-         </padding>
-      </VBox>
       <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="496.0" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
          <children>
             <Button fx:id="backButton" layoutX="164.0" layoutY="41.0" mnemonicParsing="false" text="Back" />

@@ -85,9 +85,10 @@
       </VBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="60.0">
          <children>
-          <Button fx:id="customersButton" mnemonicParsing="false" text="Customers" />
-            <Button fx:id="appointmentsButton" mnemonicParsing="false" text="Appointments" />
-            <Button fx:id="reportsButton" mnemonicParsing="false" text="Reports" />
+          <Button fx:id="customersButton" mnemonicParsing="false" prefWidth="100.0" text="Customers" />
+            <Button fx:id="appointmentsButton" mnemonicParsing="false" prefWidth="100.0" text="Appointments" />
+            <Button fx:id="reportsButton" mnemonicParsing="false" prefWidth="100.0" text="Reports" />
+            <Button fx:id="logoutButton" layoutX="595.0" layoutY="58.0" mnemonicParsing="false" prefWidth="100.0" text="Logout" />
          </children>
          <padding>
             <Insets top="20.0" />

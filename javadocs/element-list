@@ -1,0 +1,15 @@
+org.devrisby.c195
+org.devrisby.c195.controllers
+org.devrisby.c195.data
+org.devrisby.c195.modules.activity
+org.devrisby.c195.modules.appointment
+org.devrisby.c195.modules.appointment.controllers
+org.devrisby.c195.modules.contact
+org.devrisby.c195.modules.country
+org.devrisby.c195.modules.customer
+org.devrisby.c195.modules.customer.controllers
+org.devrisby.c195.modules.division
+org.devrisby.c195.modules.report
+org.devrisby.c195.modules.user
+org.devrisby.c195.utils
+org.devrisby.c195.views

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="928.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devrisby.c195.controllers.CustomerController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="928.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devrisby.c195.modules.customer.controllers.CustomerController">
    <children>
       <VBox alignment="CENTER" prefHeight="136.0" prefWidth="928.0" spacing="15.0">
          <children>
@@ -31,13 +31,16 @@
             <TableColumn fx:id="countryTableColumn" minWidth="-Infinity" prefWidth="150.0" text="Country" />
             <TableColumn fx:id="phoneNumberTableColumn" minWidth="-Infinity" prefWidth="177.0" text="Phone Number" />
         </columns>
+         <VBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </VBox.margin>
       </TableView>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="928.0" spacing="10.0">
          <children>
             <Button fx:id="addButton" mnemonicParsing="false" text="Add" />
             <Button fx:id="editButton" mnemonicParsing="false" text="Edit" />
             <Button fx:id="deleteButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Delete" />
-            <Button fx:id="logoutButton" layoutX="496.0" layoutY="34.0" mnemonicParsing="false" text="Logout" />
+            <Button fx:id="backButton" layoutX="496.0" layoutY="34.0" mnemonicParsing="false" text="Back" />
          </children>
          <VBox.margin>
             <Insets />
