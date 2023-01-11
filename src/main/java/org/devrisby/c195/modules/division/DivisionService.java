@@ -1,6 +1,6 @@
 package org.devrisby.c195.modules.division;
 
-import org.devrisby.c195.data.AppDataSource;
+import org.devrisby.c195.data.SQLiteDataSource;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ public class DivisionService {
     private final DivisionRepository divisionRepository;
 
     public DivisionService() {
-        this.divisionRepository = new DivisionRepository(AppDataSource.getConnection());
+        this.divisionRepository = new DivisionRepository(SQLiteDataSource.getInstance().getConnection());
     }
 
     public List<Division> findAll() {

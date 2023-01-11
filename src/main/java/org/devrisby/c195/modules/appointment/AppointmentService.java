@@ -1,6 +1,6 @@
 package org.devrisby.c195.modules.appointment;
 
-import org.devrisby.c195.data.AppDataSource;
+import org.devrisby.c195.data.SQLiteDataSource;
 import org.devrisby.c195.modules.customer.Customer;
 import org.devrisby.c195.modules.user.User;
 import org.devrisby.c195.utils.TimeUtils;
@@ -20,7 +20,7 @@ public class AppointmentService {
     private final TimeUtils timeUtils;
 
     public AppointmentService() {
-        this.appointmentRepository = new AppointmentRepository(AppDataSource.getConnection());
+        this.appointmentRepository = new AppointmentRepository(SQLiteDataSource.getInstance().getConnection());
         this.timeUtils = new TimeUtils();
     }
 

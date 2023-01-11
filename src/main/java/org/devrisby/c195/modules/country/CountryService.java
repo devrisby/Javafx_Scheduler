@@ -1,6 +1,6 @@
 package org.devrisby.c195.modules.country;
 
-import org.devrisby.c195.data.AppDataSource;
+import org.devrisby.c195.data.SQLiteDataSource;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public class CountryService {
     private final CountryRepository countryRepository;
 
     public CountryService() {
-        this.countryRepository = new CountryRepository(AppDataSource.getConnection());
+        this.countryRepository = new CountryRepository(SQLiteDataSource.getInstance().getConnection());
     }
 
     public List<Country> findAll() {

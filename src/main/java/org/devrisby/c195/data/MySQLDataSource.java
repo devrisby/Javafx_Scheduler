@@ -4,9 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/** Class for Database Connection */
-public class AppDataSource {
-
+// Old code based on the course
+public class MySQLDataSource {
     private static final String protocol = "jdbc";
     private static final String vendorName = ":mysql:";
     private static final String ipAddress = "//localhost/";

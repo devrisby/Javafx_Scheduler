@@ -1,6 +1,6 @@
 package org.devrisby.c195.modules.customer;
 
-import org.devrisby.c195.data.AppDataSource;
+import org.devrisby.c195.data.SQLiteDataSource;
 import org.devrisby.c195.modules.country.Country;
 import org.devrisby.c195.modules.appointment.AppointmentService;
 
@@ -12,7 +12,7 @@ public class CustomerService {
     private final AppointmentService appointmentService;
 
     public CustomerService() {
-        this.customerRepository = new CustomerRepository(AppDataSource.getConnection());
+        this.customerRepository = new CustomerRepository(SQLiteDataSource.getInstance().getConnection());
         this.appointmentService = new AppointmentService();
     }
 

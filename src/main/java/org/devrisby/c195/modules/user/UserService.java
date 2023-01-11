@@ -1,6 +1,6 @@
 package org.devrisby.c195.modules.user;
 
-import org.devrisby.c195.data.AppDataSource;
+import org.devrisby.c195.data.SQLiteDataSource;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +11,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     public UserService() {
-        this.userRepository = new UserRepository(AppDataSource.getConnection());
+        this.userRepository = new UserRepository(SQLiteDataSource.getInstance().getConnection());
     }
 
     public List<User> findAll() {

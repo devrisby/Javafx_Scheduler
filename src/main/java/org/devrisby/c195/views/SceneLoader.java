@@ -76,11 +76,12 @@ public class SceneLoader {
     }
 
     private static Stage initStage(Stage stage, String windowTitle, Parent root) {
-        Path resourceDirPath = Paths.get("..", "..", "..", "..");
+        String filePath = SceneLoader.class.getResource("/logo.png").toString();
+        Image logo = new Image(filePath);
 
         stage.setTitle(windowTitle);
         stage.setScene(new Scene(root));
-        stage.getIcons().add(new Image(SceneLoader.class.getResource(Paths.get(resourceDirPath.toString(), "logo.png").toString()).toString()));
+        stage.getIcons().add(logo);
         return stage;
     }
 }

@@ -1,6 +1,6 @@
 package org.devrisby.c195.modules.contact;
 
-import org.devrisby.c195.data.AppDataSource;
+import org.devrisby.c195.data.SQLiteDataSource;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ public class ContactService {
     private final ContactRepository contactRepository;
 
     public ContactService() {
-        this.contactRepository = new ContactRepository(AppDataSource.getConnection());
+        this.contactRepository = new ContactRepository(SQLiteDataSource.getInstance().getConnection());
     }
 
     public List<Contact> findAll() {
